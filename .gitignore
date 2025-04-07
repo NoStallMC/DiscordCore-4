@@ -229,3 +229,5 @@ hs_err_pid*
 
 # Remvoe server stuff from path
 /server/
+build.xml
+.externalToolBuilders/New_Builder.launch

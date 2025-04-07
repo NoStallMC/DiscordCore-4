@@ -12,34 +12,27 @@ import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-
 public class DiscordBot extends ListenerAdapter {
     public DiscordCore plugin;
     public JDA jda;
 
-
     public DiscordBot(DiscordCore main) {
         this.plugin = main;
     }
-
     public void startBot(String token, ArrayList<GatewayIntent> intents) throws LoginException {
         jda = JDABuilder.createDefault(token).enableIntents(intents).setMemberCachePolicy(MemberCachePolicy.ALL).build();
         jda.addEventListener(this);
 
     }
-
     public void discordBotStop() {
         System.out.println("Discord Bot Will Begin Shutdown: " + jda.getStatus());
         jda.shutdownNow();
 
     }
-
     @Deprecated
     public void DiscordSendToChannel(String channel, String message) {
         this.discordSendToChannel(channel, message);
     }
-
-
     public void discordSendToChannel(String channel, String message) {
         if (jda.getStatus() == JDA.Status.CONNECTED) {
             TextChannel textChannel = jda.getTextChannelById(channel);
@@ -49,11 +42,9 @@ public class DiscordBot extends ListenerAdapter {
         }
 
     }
-
     public JDA getJda() {
         return jda;
     }
-
     public void onReady(ReadyEvent event) {
         plugin.logInfo(Level.INFO, "Discord Bot (" + event.getJDA().getSelfUser().getName() + "#" + event.getJDA().getSelfUser().getDiscriminator() + ") connected to " + event.getGuildTotalCount() + " guilds.");
     }
